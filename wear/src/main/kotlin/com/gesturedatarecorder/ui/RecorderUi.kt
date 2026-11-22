@@ -523,12 +523,14 @@ private fun ListenScreen(status: RecordingStatus) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(3.dp)
         ) {
-            val word = status.word
+            val sentence = status.sentence.ifEmpty { status.finishedSentence }
             when {
-                // Spelling: the first phoneme of each bin so far, then the words to tap.
+                // Show both sounds for each recent gesture, then the words to tap.
                 latest != null -> {
                     Label(
-                        status.heard.takeLast(6).mapNotNull { Gesture.fromLabel(it)?.phonemes?.substringBefore('/') }.joinToString(" "),
+                        status.heard.takeLast(2)
+                            .mapNotNull { Gesture.fromLabel(it)?.phonemes }
+                            .joinToString(" "),
                         color = hot,
                         sizeSp = 11f,
                         bold = true
@@ -541,12 +543,17 @@ private fun ListenScreen(status: RecordingStatus) {
                         WordChoice(candidate, whole, picked = at == status.cursor) { RecordingRepository.chooseWord(candidate) }
                     }
                 }
-                // The word that was just chosen, until the next gesture.
-                word != null -> {
-                    Readout(word, sizeSp = readoutSize(word, maxSp = 30f, widthDp = LISTEN_CENTER_DP), color = hot)
+                sentence.isNotEmpty() -> {
+                    Note(sentence.takeLast(4).joinToString(" "), color = hot, sizeSp = 11f)
                     if (!status.voiceWorks) Label("No voice on watch", color = Ink.Dim, sizeSp = 9f)
                 }
                 else -> Label("Make a gesture")
+            }
+            if (status.heard.isEmpty() && status.sentence.isNotEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    TapLabel("Delete", RecordingRepository::removeWord)
+                    TapLabel("Done", RecordingRepository::finishSentence)
+                }
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 if (status.heard.isNotEmpty()) TapLabel("Undo", RecordingRepository::undoGesture)

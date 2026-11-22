@@ -262,6 +262,12 @@ class ListenSession(
         log.add(Spelled(Lexicon.key(labels).orEmpty(), null))
     }
 
+    /** Record sentence edits in the same stream as the word selections. */
+    @Synchronized
+    fun logSentenceAction(action: String) {
+        log.add(Marker(action, lastEventNs, ""))
+    }
+
     /** The raw gyro and accelerometer events of the session in the recorder's CSV format. */
     @Synchronized
     fun streamCsv(): String = CaptureCsv.build("LISTEN", events)
@@ -270,6 +276,7 @@ class ListenSession(
      * One line per burst: where it was in the stream and what the watch decided. What the user
      * tapped is a line too, in its place among the bursts: `WORD:<word>` for a chosen word, with
      * the gesture digits made for it in `nearest`, and `UNDO` with the digits that were left.
+     * `REMOVE_WORD` and `FINISH_SENTENCE` mark edits to the committed words.
      * `FIST`, `JOLT` (a jolt that was no fist) and `BUZZ` (the watch's own buzz, with its length
      * in ms in `nearest`) carry the sensor time they happened at in `at_ns`.
      *

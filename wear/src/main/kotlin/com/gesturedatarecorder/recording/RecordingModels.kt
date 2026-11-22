@@ -104,14 +104,16 @@ data class RecordingStatus(
     val repsNeeded: Int = 0,
     /** Listen: labels of the gestures of the word being spelled, newest last. Emptied when a word is chosen. */
     val heard: List<String> = emptyList(),
-    /** Listen: the words the gestures so far spell exactly, most common first. */
+    /** Listen: the words the gestures so far spell exactly, ranked by sentence context and frequency. */
     val words: List<String> = emptyList(),
-    /** Listen: the words that start with the gestures so far and need more, most common first. */
+    /** Listen: the words that start with the gestures so far and need more, ranked by sentence context and frequency. */
     val wordHints: List<String> = emptyList(),
     /** Listen: which of the offered words the tilt cursor is on, counted from 0. -1 when the cursor is off or nothing is offered. */
     val cursor: Int = -1,
-    /** Listen: the last word the user chose, or null when there is none yet. */
-    val word: String? = null,
+    /** Listen: committed words in the current sentence. */
+    val sentence: List<String> = emptyList(),
+    /** Listen: the most recently completed sentence. */
+    val finishedSentence: List<String> = emptyList(),
     /** Listen: how many words have been chosen in this session. */
     val wordCount: Int = 0,
     /** Listen: false once it is known that the watch cannot say words out loud. */

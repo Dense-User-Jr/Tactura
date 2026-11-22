@@ -28,6 +28,10 @@ object RecordingRepository {
 
         /** Take back the last gesture. */
         object Undo : ListenCommand
+
+        object RemoveWord : ListenCommand
+
+        object FinishSentence : ListenCommand
     }
 
     private val _cursorAxis = MutableStateFlow(TiltCursor.Axis.NOD)
@@ -53,6 +57,14 @@ object RecordingRepository {
     /** Listen mode: take back the last gesture. */
     fun undoGesture() {
         _listenCommands.tryEmit(ListenCommand.Undo)
+    }
+
+    fun removeWord() {
+        _listenCommands.tryEmit(ListenCommand.RemoveWord)
+    }
+
+    fun finishSentence() {
+        _listenCommands.tryEmit(ListenCommand.FinishSentence)
     }
 
     /** Cancels the running session, if any. Never starts the service. */

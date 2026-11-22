@@ -25,6 +25,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.gesturedatarecorder.R
+import com.gesturedatarecorder.sentencecontext.SentenceRanker
 import com.gesturedatarecorder.ui.MainActivity
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -117,6 +118,7 @@ class RecordingService : Service(), SensorEventListener {
     /** The words that can be spelled. Read once when Listen mode starts. */
     @Volatile
     private var lexicon: List<Lexicon.Entry> = emptyList()
+    private var sentenceRanker = SentenceRanker.fallback
 
     override fun onCreate() {
         super.onCreate()
@@ -277,7 +279,11 @@ class RecordingService : Service(), SensorEventListener {
             endService()
             return
         }
-        lexicon = withContext(Dispatchers.IO) { Lexicon.load(applicationContext) }
+        val (entries, ranker) = withContext(Dispatchers.IO) {
+            Lexicon.load(applicationContext) to SentenceRanker.load(applicationContext)
+        }
+        lexicon = entries
+        sentenceRanker = ranker
         val session = ListenSession(BlueprintStore.blueprints(), BlueprintStore.notes())
         val startedAtWallMs = System.currentTimeMillis()
         try {
@@ -381,29 +387,39 @@ class RecordingService : Service(), SensorEventListener {
         if (at == status.cursor) return
         // A light buzz for each step of the cursor, so it can be felt without looking.
         if (at >= 0 && status.cursor >= 0) vibrate(15)
-        RecordingRepository.update { it.copy(cursor = at) }
+        RecordingRepository.update { if (it.heard === status.heard) it.copy(cursor = at) else it }
     }
 
     /** The gestures [made] with the words they spell and the words they start, for the Listen screen. */
     private fun RecordingStatus.spelling(made: List<String>): RecordingStatus {
         val key = Lexicon.key(made).orEmpty()
-        return copy(heard = made, words = Lexicon.exact(lexicon, key), wordHints = Lexicon.longer(lexicon, key))
+        return copy(
+            heard = made,
+            words = sentenceRanker.rank(sentence, Lexicon.exact(lexicon, key)),
+            wordHints = sentenceRanker.rank(sentence, Lexicon.longer(lexicon, key), useCorpus = false),
+            cursor = -1
+        )
     }
 
     /** Listen mode, main thread: something was tapped on the Listen screen. */
     private fun onListenCommand(command: RecordingRepository.ListenCommand) {
         val session = listening ?: return
-        val made = RecordingRepository.status.value.heard
+        val status = RecordingRepository.status.value
+        val made = status.heard
         when (command) {
             // The user tapped the word they were spelling: show it with a double tick and start the next word.
             is RecordingRepository.ListenCommand.Choose -> {
-                if (made.isEmpty()) return
+                val offered = (status.words + status.wordHints).take(ListenSession.WORDS_SHOWN)
+                if (made.isEmpty() || command.word !in offered) return
                 session.logWord(made, command.word)
                 session.rezeroCursor()
                 vibrateStopCue()
                 wordTick.play()
                 voice?.speak(command.word)
-                RecordingRepository.update { it.spelling(emptyList()).copy(word = command.word, wordCount = it.wordCount + 1) }
+                RecordingRepository.update {
+                    it.copy(sentence = it.sentence + command.word, wordCount = it.wordCount + 1)
+                        .spelling(emptyList())
+                }
             }
             // Take back the last gesture.
             RecordingRepository.ListenCommand.Undo -> {
@@ -412,6 +428,16 @@ class RecordingService : Service(), SensorEventListener {
                 session.rezeroCursor()
                 vibrate(20)
                 RecordingRepository.update { it.spelling(it.heard.dropLast(1)) }
+            }
+            RecordingRepository.ListenCommand.RemoveWord -> {
+                if (made.isNotEmpty() || status.sentence.isEmpty()) return
+                session.logSentenceAction("REMOVE_WORD")
+                RecordingRepository.update { it.copy(sentence = it.sentence.dropLast(1)).spelling(it.heard) }
+            }
+            RecordingRepository.ListenCommand.FinishSentence -> {
+                if (made.isNotEmpty() || status.sentence.isEmpty()) return
+                session.logSentenceAction("FINISH_SENTENCE")
+                RecordingRepository.update { it.copy(finishedSentence = it.sentence, sentence = emptyList()).spelling(it.heard) }
             }
         }
     }
