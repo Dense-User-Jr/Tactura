@@ -436,6 +436,7 @@ class RecordingService : Service(), SensorEventListener {
             }
             RecordingRepository.ListenCommand.FinishSentence -> {
                 if (made.isNotEmpty() || status.sentence.isEmpty()) return
+                sentenceRanker.learnFinishedSentence(status.sentence)
                 session.logSentenceAction("FINISH_SENTENCE")
                 RecordingRepository.update { it.copy(finishedSentence = it.sentence, sentence = emptyList()).spelling(it.heard) }
             }

@@ -35,6 +35,23 @@ class SentenceRankerTest {
     }
 
     @Test
+    fun finishedSentencesPromoteConfirmedMatchesWithinTheSession() {
+        val ranker = SentenceRanker.fallback
+        val choices = listOf("to", "do", "two", "too", "due")
+        val prefix = listOf("this", "is")
+        assertEquals("too", ranker.rank(prefix, choices).first())
+
+        ranker.learnFinishedSentence(prefix + "due")
+        ranker.learnFinishedSentence(listOf("it", "is", "too"))
+        ranker.learnFinishedSentence(listOf("it", "is", "too"))
+
+        assertEquals("due", ranker.rank(prefix, choices).first())
+        assertEquals("too", ranker.rank(prefix, choices, useCorpus = false).first())
+        assertEquals("too", SentenceRanker.fallback.rank(prefix, choices).first())
+        assertEquals(choices, ranker.rank(listOf("due"), choices))
+    }
+
+    @Test
     fun absentContextOrUnavailablePreferencePreservesLexiconOrder() {
         val matches = listOf("to", "do", "two")
 

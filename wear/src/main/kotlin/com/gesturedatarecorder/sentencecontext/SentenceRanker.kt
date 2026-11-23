@@ -3,8 +3,23 @@ package com.gesturedatarecorder.sentencecontext
 import android.content.Context
 import android.util.Log
 
-/** Ranks lexicon matches with the last two committed words and bundled corpus counts. */
+/** Ranks lexicon matches using bundled corpus counts and sentences finished in this session. */
 internal class SentenceRanker private constructor(private val counts: Map<String, Map<String, Int>>) {
+    private val confirmed = mutableMapOf<String, MutableMap<String, Int>>()
+
+    @Synchronized
+    fun learnFinishedSentence(words: List<String>) {
+        for (index in 1 until words.size) {
+            val word = words[index]
+            val contexts = listOf(words[index - 1], words.subList(maxOf(0, index - 2), index).joinToString(" "))
+            for (context in contexts.distinct()) {
+                val continuations = confirmed.getOrPut(context) { mutableMapOf() }
+                continuations[word] = continuations.getOrElse(word) { 0 } + 1
+            }
+        }
+    }
+
+    @Synchronized
     fun rank(prefix: List<String>, candidates: List<String>, useCorpus: Boolean = true): List<String> {
         if (prefix.isEmpty() || candidates.size < 2) return candidates
         val last = prefix.last()
@@ -14,10 +29,17 @@ internal class SentenceRanker private constructor(private val counts: Map<String
         val ranked = candidates.sortedByDescending { word ->
             bigram.getOrElse(word) { 0 } + TRIGRAM_WEIGHT * trigram.getOrElse(word) { 0 }
         }
-        val preferred = listOfNotNull(previousPair, last)
+        val contexts = listOfNotNull(previousPair, last)
+        val preferred = contexts
             .map { context -> preferences[context].orEmpty().filter { it in candidates } }
             .firstOrNull { it.isNotEmpty() }.orEmpty()
-        return preferred + ranked.filterNot { it in preferred }
+        val baseline = preferred + ranked.filterNot { it in preferred }
+        if (!useCorpus) return baseline
+        val learned = contexts.asSequence()
+            .mapNotNull { confirmed[it] }
+            .firstOrNull { options -> candidates.any { it in options } }
+            ?: return baseline
+        return baseline.sortedByDescending { learned[it] ?: 0 }
     }
 
     companion object {
@@ -34,7 +56,7 @@ internal class SentenceRanker private constructor(private val counts: Map<String
             "in" to listOf("two", "the")
         )
 
-        val fallback = SentenceRanker(emptyMap())
+        val fallback get() = SentenceRanker(emptyMap())
 
         fun load(context: Context): SentenceRanker = try {
             context.assets.open(ASSET).bufferedReader().useLines { parse(it) }

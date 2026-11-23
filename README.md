@@ -11,6 +11,8 @@ A Wear OS data-collection app for training a gesture-classification model. It re
 
 The app can record labeled sensor data and classify gestures directly on the watch. The selected gesture is stored as the training label in the filename and in every CSV row; the user performs the gesture during the capture window.
 
+See [Listen mode sentence context](docs/sentence-context-replay.md) for the word-ranking behavior and ten-fold replay results.
+
 ## Requirements
 
 - A Wear OS watch with accelerometer and gyroscope sensors. The app was tested with a Pixel Watch 2.

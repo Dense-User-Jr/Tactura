@@ -51,31 +51,52 @@ def read_lexicon():
     return encoding, groups
 
 
-def read_documents(path, encoding, groups):
-    """Keep real word adjacency and reset when a word cannot be entered."""
+def read_sentences(path):
+    """Yield Brown documents as ordered sentences of lowercase tokens."""
     with ZipFile(path) as archive:
         for name in sorted(archive.namelist()):
-            if not re.fullmatch(r"brown/c[a-z]\d{2}", name):
-                continue
-            events = Counter()
-            words = 0
-            for line in archive.read(name).decode("ascii").splitlines():
-                prefix = ()
-                for token in line.split():
-                    word = token.rsplit("/", 1)[0].lower()
-                    if not re.search("[a-z]", word):
-                        if word in {".", "!", "?", ";", ":"}:
-                            prefix = ()
-                        continue
-                    words += 1
-                    if word not in encoding:
-                        prefix = ()
-                        continue
-                    key = encoding[word]
-                    if len(groups[key]) > 1 and prefix:
-                        events[prefix, word, key] += 1
-                    prefix = (*prefix[-1:], word)
-            yield events, words
+            if re.fullmatch(r"brown/c[a-z]\d{2}", name):
+                yield [
+                    [token.rsplit("/", 1)[0].lower() for token in line.split()]
+                    for line in archive.read(name).decode("ascii").splitlines() if line.strip()
+                ]
+
+
+def spellable_spans(sentence, encoding):
+    """Keep real word adjacency and reset when a word cannot be entered."""
+    span = []
+    for word in sentence:
+        if word in encoding:
+            span.append(word)
+        elif word in {".", "!", "?", ";", ":"} or re.search("[a-z]", word):
+            if span:
+                yield span
+                span = []
+    if span:
+        yield span
+
+
+def choices(span, encoding, groups):
+    for index, word in enumerate(span[1:], start=1):
+        key = encoding[word]
+        if len(groups[key]) > 1:
+            yield tuple(span[max(0, index - 2):index]), word, key
+
+
+def document_events(sentences, encoding, groups):
+    events = Counter(
+        choice
+        for sentence in sentences
+        for span in spellable_spans(sentence, encoding)
+        for choice in choices(span, encoding, groups)
+    )
+    words = sum(bool(re.search("[a-z]", word)) for sentence in sentences for word in sentence)
+    return events, words
+
+
+def read_documents(path, encoding, groups):
+    for sentences in read_sentences(path):
+        yield document_events(sentences, encoding, groups)
 
 
 def fit(events):
