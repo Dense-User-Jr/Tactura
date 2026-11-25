@@ -9,6 +9,7 @@ data/
   dhruv/
     recordings/     250 Record-mode CSVs, 10/9, 50 of each of 5 gestures
     early-tests/    2 Record-mode CSVs from 9/28, probably Dhruv's, not confirmed
+    classify/       120 Classify windows, 11/23 and 11/24, the phase 2 scorecard on Dhruv's own watch
   russell/
     classify/       461 Classify windows, 11/10 and 11/15
     calibration/    81 calibration reps, 11/10 and 11/15
@@ -19,8 +20,9 @@ data/
 
 | Folder | Who | Wrist | Dates | Readings per second |
 | --- | --- | --- | --- | --- |
-| `dhruv/recordings` | Dhruv | not written down | 2026-10-09, 9:32 to 11:09 PM | 50 |
-| `dhruv/early-tests` | probably Dhruv | not written down | 2026-09-28 | 50 |
+| `dhruv/recordings` | Dhruv | left | 2026-10-09, 9:32 to 11:09 PM | 50 |
+| `dhruv/classify` | Dhruv, on his own watch | left | 2026-11-23 and 11-24 | 50 |
+| `dhruv/early-tests` | probably Dhruv | left | 2026-09-28 | 50 |
 | `russell/*` | Russell | left | 2026-11-10, 11-15 and 11-16 | 50, except the files named `double_tap`, which are about 100 |
 
 ## Answer keys (labels)
@@ -33,6 +35,7 @@ A labels file says what was really done in each file. It has one row per file: `
 | `russell/classify/labels_20261110_late.csv` | 11/10, 10:42 to 11:50 PM (the first blueprint build) |
 | `russell/classify/labels_20261115.csv` | 11/15, every round |
 | `russell/recordings/labels.csv` | all 100 Record-mode files, including the ones named `double_tap` |
+| `dhruv/classify/labels.csv` | 11/23 right after calibrating (50 gestures, 10 still, 10 pose changes) and 11/24 with no recalibration (50 gestures) |
 
 The `truth` column uses the gesture names (`FLICK_UP`, `TWIST_LEFT`, `SHOVE_UP`...), plus `PINCH`, `DOUBLE_PINCH` and `FIST`, and two words for windows that should give no gesture: `STILL` (the arm did not move) and `NOTHING` (the arm moved, but not as a gesture, like a hair scratch). An empty `truth` means nobody wrote down what was done, so leave that file out of any score.
 

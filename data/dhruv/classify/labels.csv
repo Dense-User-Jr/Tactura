@@ -1,0 +1,121 @@
+file,truth,round,note
+0001_classify_pred-flick_up-29_20261123_160354.csv,FLICK_UP,11/23 after calibration,not the cleanest
+0002_classify_pred-flick_up-65_20261123_160445.csv,FLICK_UP,11/23 after calibration,
+0003_classify_pred-flick_up-63_20261123_160522.csv,FLICK_UP,11/23 after calibration,
+0004_classify_pred-flick_up-71_20261123_160537.csv,FLICK_UP,11/23 after calibration,
+0005_classify_pred-flick_up-51_20261123_160547.csv,FLICK_UP,11/23 after calibration,
+0006_classify_pred-flick_up-51_20261123_160600.csv,FLICK_UP,11/23 after calibration,
+0007_classify_pred-flick_up-70_20261123_160616.csv,FLICK_UP,11/23 after calibration,
+0008_classify_pred-flick_up-67_20261123_160635.csv,FLICK_UP,11/23 after calibration,
+0009_classify_pred-flick_up-58_20261123_160647.csv,FLICK_UP,11/23 after calibration,
+0010_classify_pred-flick_up-63_20261123_160657.csv,FLICK_UP,11/23 after calibration,
+0011_classify_pred-flick_down-35_20261123_160730.csv,FLICK_DOWN,11/23 after calibration,not the cleanest
+0012_classify_pred-flick_down-39_20261123_160752.csv,FLICK_DOWN,11/23 after calibration,
+0013_classify_pred-flick_down-70_20261123_160808.csv,FLICK_DOWN,11/23 after calibration,
+0014_classify_pred-flick_down-41_20261123_160817.csv,FLICK_DOWN,11/23 after calibration,tapped surface
+0015_classify_pred-flick_down-28_20261123_160832.csv,FLICK_DOWN,11/23 after calibration,
+0016_classify_pred-none-0_20261123_160848.csv,FLICK_DOWN,11/23 after calibration,sharp
+0017_classify_pred-flick_down-38_20261123_160929.csv,FLICK_DOWN,11/23 after calibration,
+0018_classify_pred-flick_down-19_20261123_160941.csv,FLICK_DOWN,11/23 after calibration,
+0019_classify_pred-flick_down-36_20261123_160956.csv,FLICK_DOWN,11/23 after calibration,
+0020_classify_pred-none-0_20261123_161010.csv,FLICK_DOWN,11/23 after calibration,
+0021_classify_pred-twist_right-63_20261123_161041.csv,TWIST_RIGHT,11/23 after calibration,"rigid, bit jittery"
+0022_classify_pred-twist_right-75_20261123_161057.csv,TWIST_RIGHT,11/23 after calibration,
+0023_classify_pred-twist_right-53_20261123_161115.csv,TWIST_RIGHT,11/23 after calibration,bit slow
+0024_classify_pred-twist_right-80_20261123_161129.csv,TWIST_RIGHT,11/23 after calibration,
+0025_classify_pred-twist_right-66_20261123_161138.csv,TWIST_RIGHT,11/23 after calibration,
+0026_classify_pred-twist_right-67_20261123_161146.csv,TWIST_RIGHT,11/23 after calibration,
+0027_classify_pred-twist_right-73_20261123_161154.csv,TWIST_RIGHT,11/23 after calibration,
+0028_classify_pred-twist_right-61_20261123_161202.csv,TWIST_RIGHT,11/23 after calibration,
+0029_classify_pred-twist_right-76_20261123_161218.csv,TWIST_RIGHT,11/23 after calibration,
+0030_classify_pred-twist_right-63_20261123_161226.csv,TWIST_RIGHT,11/23 after calibration,
+0031_classify_pred-twist_left-53_20261123_161236.csv,TWIST_LEFT,11/23 after calibration,
+0032_classify_pred-twist_left-87_20261123_161258.csv,TWIST_LEFT,11/23 after calibration,
+0033_classify_pred-twist_left-79_20261123_161305.csv,TWIST_LEFT,11/23 after calibration,
+0034_classify_pred-twist_left-70_20261123_161315.csv,TWIST_LEFT,11/23 after calibration,
+0035_classify_pred-twist_left-58_20261123_161323.csv,TWIST_LEFT,11/23 after calibration,
+0036_classify_pred-twist_left-77_20261123_161331.csv,TWIST_LEFT,11/23 after calibration,
+0037_classify_pred-twist_left-65_20261123_161338.csv,TWIST_LEFT,11/23 after calibration,
+0038_classify_pred-twist_left-69_20261123_161351.csv,TWIST_LEFT,11/23 after calibration,
+0039_classify_pred-twist_left-63_20261123_161400.csv,TWIST_LEFT,11/23 after calibration,mildly jagged
+0040_classify_pred-twist_left-71_20261123_161413.csv,TWIST_LEFT,11/23 after calibration,
+0041_classify_pred-shake-76_20261123_161438.csv,SHAKE,11/23 after calibration,
+0042_classify_pred-shake-66_20261123_161450.csv,SHAKE,11/23 after calibration,
+0043_classify_pred-shake-62_20261123_161500.csv,SHAKE,11/23 after calibration,
+0044_classify_pred-shake-70_20261123_161508.csv,SHAKE,11/23 after calibration,
+0045_classify_pred-shake-74_20261123_161515.csv,SHAKE,11/23 after calibration,
+0046_classify_pred-shake-73_20261123_161523.csv,SHAKE,11/23 after calibration,
+0047_classify_pred-shake-71_20261123_161543.csv,SHAKE,11/23 after calibration,
+0048_classify_pred-shake-77_20261123_161552.csv,SHAKE,11/23 after calibration,
+0049_classify_pred-shake-69_20261123_161604.csv,SHAKE,11/23 after calibration,
+0050_classify_pred-none-0_20261123_161614.csv,SHAKE,11/23 after calibration,
+0051_classify_pred-none-0_20261123_161738.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0052_classify_pred-none-0_20261123_161749.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0053_classify_pred-none-0_20261123_161811.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0054_classify_pred-none-0_20261123_161818.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0055_classify_pred-none-0_20261123_161825.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0056_classify_pred-none-0_20261123_161834.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0057_classify_pred-none-0_20261123_161841.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0058_classify_pred-none-0_20261123_161902.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0059_classify_pred-none-0_20261123_161909.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0060_classify_pred-none-0_20261123_161917.csv,STILL,11/23 after calibration,"still arm, pose not written down"
+0061_classify_pred-none-0_20261123_161943.csv,NOTHING,11/23 after calibration,lap to seat
+0062_classify_pred-none-0_20261123_161953.csv,NOTHING,11/23 after calibration,elbow flat to resting
+0063_classify_pred-none-0_20261123_162025.csv,NOTHING,11/23 after calibration,lap to seat
+0064_classify_pred-none-0_20261123_162037.csv,NOTHING,11/23 after calibration,lap to itching face
+0065_classify_pred-none-0_20261123_162052.csv,NOTHING,11/23 after calibration,rubbing forehead
+0066_classify_pred-none-0_20261123_162110.csv,NOTHING,11/23 after calibration,scrolling Reels
+0067_classify_pred-none-0_20261123_162133.csv,NOTHING,11/23 after calibration,cracked both hands' knuckles
+0068_classify_pred-none-0_20261123_162153.csv,NOTHING,11/23 after calibration,stretched arms against hips
+0069_classify_pred-none-0_20261123_162212.csv,NOTHING,11/23 after calibration,reached for glass
+0070_classify_pred-none-0_20261123_162226.csv,NOTHING,11/23 after calibration,checked time on watch before letting arm go slack
+0071_classify_pred-flick_up-47_20261124_182139.csv,FLICK_UP,11/24 no recalibration,
+0072_classify_pred-flick_up-61_20261124_182154.csv,FLICK_UP,11/24 no recalibration,
+0073_classify_pred-flick_up-61_20261124_182204.csv,FLICK_UP,11/24 no recalibration,
+0074_classify_pred-flick_up-49_20261124_182211.csv,FLICK_UP,11/24 no recalibration,
+0075_classify_pred-flick_up-49_20261124_182219.csv,FLICK_UP,11/24 no recalibration,
+0076_classify_pred-flick_up-45_20261124_182240.csv,FLICK_UP,11/24 no recalibration,
+0077_classify_pred-flick_up-65_20261124_182247.csv,FLICK_UP,11/24 no recalibration,bit slow
+0078_classify_pred-flick_up-56_20261124_182300.csv,FLICK_UP,11/24 no recalibration,
+0079_classify_pred-flick_up-61_20261124_182314.csv,FLICK_UP,11/24 no recalibration,
+0080_classify_pred-flick_up-65_20261124_182322.csv,FLICK_UP,11/24 no recalibration,
+0081_classify_pred-flick_down-40_20261124_182352.csv,FLICK_DOWN,11/24 no recalibration,
+0082_classify_pred-flick_down-32_20261124_182359.csv,FLICK_DOWN,11/24 no recalibration,
+0083_classify_pred-flick_down-45_20261124_182406.csv,FLICK_DOWN,11/24 no recalibration,
+0084_classify_pred-flick_down-34_20261124_182413.csv,FLICK_DOWN,11/24 no recalibration,
+0085_classify_pred-flick_down-28_20261124_182420.csv,FLICK_DOWN,11/24 no recalibration,
+0086_classify_pred-flick_down-27_20261124_182428.csv,FLICK_DOWN,11/24 no recalibration,
+0087_classify_pred-flick_down-29_20261124_182435.csv,FLICK_DOWN,11/24 no recalibration,
+0088_classify_pred-flick_down-35_20261124_182454.csv,FLICK_DOWN,11/24 no recalibration,
+0089_classify_pred-flick_down-41_20261124_182504.csv,FLICK_DOWN,11/24 no recalibration,
+0090_classify_pred-flick_down-33_20261124_182516.csv,FLICK_DOWN,11/24 no recalibration,
+0091_classify_pred-twist_right-70_20261124_182536.csv,TWIST_RIGHT,11/24 no recalibration,
+0092_classify_pred-twist_right-66_20261124_182545.csv,TWIST_RIGHT,11/24 no recalibration,
+0093_classify_pred-twist_right-61_20261124_182554.csv,TWIST_RIGHT,11/24 no recalibration,
+0094_classify_pred-twist_right-77_20261124_182602.csv,TWIST_RIGHT,11/24 no recalibration,
+0095_classify_pred-twist_right-69_20261124_182609.csv,TWIST_RIGHT,11/24 no recalibration,
+0096_classify_pred-twist_right-72_20261124_182617.csv,TWIST_RIGHT,11/24 no recalibration,
+0097_classify_pred-twist_right-63_20261124_182624.csv,TWIST_RIGHT,11/24 no recalibration,
+0098_classify_pred-twist_right-59_20261124_182632.csv,TWIST_RIGHT,11/24 no recalibration,
+0099_classify_pred-twist_right-74_20261124_182647.csv,TWIST_RIGHT,11/24 no recalibration,
+0100_classify_pred-twist_right-64_20261124_182655.csv,TWIST_RIGHT,11/24 no recalibration,
+0101_classify_pred-twist_left-41_20261124_182707.csv,TWIST_LEFT,11/24 no recalibration,
+0102_classify_pred-twist_left-72_20261124_182731.csv,TWIST_LEFT,11/24 no recalibration,
+0103_classify_pred-twist_left-70_20261124_182738.csv,TWIST_LEFT,11/24 no recalibration,
+0104_classify_pred-twist_left-58_20261124_182745.csv,TWIST_LEFT,11/24 no recalibration,
+0105_classify_pred-twist_left-75_20261124_182752.csv,TWIST_LEFT,11/24 no recalibration,
+0106_classify_pred-twist_left-80_20261124_182759.csv,TWIST_LEFT,11/24 no recalibration,
+0107_classify_pred-twist_left-75_20261124_182806.csv,TWIST_LEFT,11/24 no recalibration,
+0108_classify_pred-twist_left-75_20261124_182813.csv,TWIST_LEFT,11/24 no recalibration,
+0109_classify_pred-twist_left-80_20261124_182824.csv,TWIST_LEFT,11/24 no recalibration,
+0110_classify_pred-twist_left-63_20261124_182831.csv,TWIST_LEFT,11/24 no recalibration,
+0111_classify_pred-shake-74_20261124_182848.csv,SHAKE,11/24 no recalibration,
+0112_classify_pred-shake-73_20261124_182855.csv,SHAKE,11/24 no recalibration,
+0113_classify_pred-shake-79_20261124_182903.csv,SHAKE,11/24 no recalibration,
+0114_classify_pred-shake-84_20261124_182910.csv,SHAKE,11/24 no recalibration,
+0115_classify_pred-none-0_20261124_182917.csv,SHAKE,11/24 no recalibration,bit jagged
+0116_classify_pred-shake-66_20261124_182933.csv,SHAKE,11/24 no recalibration,
+0117_classify_pred-shake-61_20261124_182941.csv,SHAKE,11/24 no recalibration,
+0118_classify_pred-shake-56_20261124_183005.csv,SHAKE,11/24 no recalibration,
+0119_classify_pred-shake-62_20261124_183012.csv,SHAKE,11/24 no recalibration,
+0120_classify_pred-shake-74_20261124_183019.csv,SHAKE,11/24 no recalibration,
